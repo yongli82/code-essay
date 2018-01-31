@@ -8,6 +8,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author yangyongli
@@ -101,4 +102,13 @@ public class Article implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "record_status")
     private RecordStatus recordStatus = RecordStatus.VALID;
+
+    public String getPublishTimeString(){
+        if(null == publishTime){
+            return "";
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return publishTime.format(formatter);
+    }
 }
